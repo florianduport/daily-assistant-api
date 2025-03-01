@@ -1,0 +1,24 @@
+---
+description: Router rules
+globs: *.router.js
+---
+always use the Endurance router instead of default express router. 
+import routerBase from "endurance-core/lib/router.js"; and  const router = routerBase(); as a base for the router object in the file. Export it as follows :  export default router;
+
+If an event should be raised : use the emitter lib as follows : 
+import { emitter, eventTypes } from "endurance-core/lib/emitter.js";
+And to emit an event :
+emitter.emit(eventTypes.GENERATE_WEEKLY_TASKS);
+eventTypes is an auto generated enum so you can create any eventType you like. 
+
+Don't import files from another modules folder. Each module must stay independant in an Endurance project. 
+Always use "import", it's a module package type.
+
+Be carefull in the order of routes in a file. For exemple : 
+router.get("/tasks/today", async (req, res) => {});
+must be define before : 
+router.get("/tasks/:id", async (req, res) => {});
+Otherwise /tasks/today will be intercepted by /tasks/:id 
+
+Router file name will be prepend to the API url. For example : 
+task-list.router.js => http://localhost:4000/task-list/ 

@@ -1,0 +1,12 @@
+---
+description: Model rules
+globs: *.model.js
+---
+import mongoose. Always use mongoose.
+
+export as follows : 
+
+const Journal = mongoose.model('Journal', JournalSchema, 'journal');
+export default Journal;
+
+Always specify the third parameter in a mongoose model to define the collection name used. 

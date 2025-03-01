@@ -1,0 +1,100 @@
+---
+description: Javascript rules
+globs: *.js
+---
+You are an expert in JavaScript, Node.js, and Endurance.
+
+## Code Style and Structure
+- Write concise, modular JavaScript code following Endurance principles.
+- Always use `import`, as Endurance is a module-based package.
+- Structure files: routers, controllers, services, middleware, models, and utilities.
+- Do not import files from another module's folder. Each module must remain independent.
+
+## Naming Conventions
+- Use consistent file naming:
+  - `*.router.js` for API routes
+  - `*.cron.js` for scheduled tasks
+  - `*.listener.js` for event listeners
+  - `*.model.js` for data models
+- Prefer named exports for better readability.
+
+## Router (API Routes)
+- Always use Endurance's `routerBase` instead of the default Express router:
+  ```js
+  import routerBase from "endurance-core/lib/router.js";
+  const router = routerBase();
+  export default router;
+  ```
+- Route order matters:
+  ```js
+  router.get("/tasks/today", async (req, res) => {});
+  router.get("/tasks/:id", async (req, res) => {});
+  ```
+  `/tasks/today` must be defined before `/tasks/:id` to avoid conflicts.
+- The router filename is prefixed in the API URL: `task-list.router.js` → `http://localhost:4000/task-list/`
+- To emit an event:
+  ```js
+  import { emitter, eventTypes } from "endurance-core/lib/emitter.js";
+  emitter.emit(eventTypes.GENERATE_WEEKLY_TASKS);
+  ```
+
+## Cron Jobs
+- Always use Endurance's Cron library:
+  ```js
+  import { loadCronJob } from 'endurance-core/lib/cron.js';
+  ```
+- Define a cron job like this:
+  ```js
+  const cronTime = process.env.GENERATE_WEEKLY_TASKS_CRON_TIME || '0 10 * * 6';
+  loadCronJob('generateWeeklyTasks', cronTime, generateWeeklyTasks);
+  ```
+
+## Event Listeners
+- Always use Endurance's Listener library:
+  ```js
+  import listener from "endurance-core/lib/listener.js";
+  import { eventTypes } from "endurance-core/lib/emitter.js";
+  ```
+- Creating an event listener:
+  ```js
+  listener.createListener(eventTypes.GENERATE_WEEKLY_TASKS, async (event) => {
+    // Event handling logic
+  });
+  ```
+- Always export the listener:
+  ```js
+  export default listener;
+  ```
+
+## Data Models
+- Always use `mongoose`:
+  ```js
+  import mongoose from "mongoose";
+  const Journal = mongoose.model('Journal', JournalSchema, 'journal');
+  export default Journal;
+  ```
+- Always specify the third parameter to define the collection name used.
+
+## Performance and Security
+- Use global middleware for logging, authentication, and error handling.
+- Always use `try/catch` for error handling in async functions.
+- Use `dotenv` to manage environment variables.
+- Validate and sanitize user input to prevent XSS and SQL injection attacks.
+- Use `helmet.js` to secure HTTP headers.
+
+## Testing and Deployment
+- Use Jest and Supertest for API testing.
+- Mock MongoDB calls in unit tests.
+- Automate deployments with GitHub Actions or GitLab CI.
+- Use PM2 or `node:cluster` to manage processes.
+- Log with Winston and store logs in a centralized service.
+
+## Key Conventions
+1. Follow Endurance's philosophy for a modular and scalable project.
+2. Prioritize simplicity and maintainability.
+3. Use the event system for better functional separation.
+4. Follow best practices to ensure scalability.
+5. Clearly document each module to facilitate collaboration.
+
+Endurance is designed to enhance Express while simplifying its usage. By following these principles, your project will remain clean, efficient, and easily extendable.
+

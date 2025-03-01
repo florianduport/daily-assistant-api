@@ -1,0 +1,17 @@
+---
+description: Listener rules
+globs: *.listener.js
+---
+Always use Endurance Listener lib and eventTypes enum from emitter lib :
+
+import listener from "endurance-core/lib/listener.js";
+import { eventTypes } from "endurance-core/lib/emitter.js";
+
+To listen to an event, use : 
+listener.createListener(eventTypes.GENERATE_WEEKLY_TASKS, async (event) => {
+
+});
+
+export default listener;
+
+

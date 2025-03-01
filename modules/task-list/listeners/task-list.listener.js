@@ -1,6 +1,7 @@
 import listener from "endurance-core/lib/listener.js";
-import { generateLiveMessage } from "../../../lib/openai.js";
 import { eventTypes } from "endurance-core/lib/emitter.js";
+
+import { generateLiveMessage } from "../../../lib/openai.js";
 
 import Task from "../models/task.model.js";
 import Journal from "../models/journal.model.js";
@@ -62,8 +63,8 @@ listener.createListener(eventTypes.GENERATE_WEEKLY_TASKS, async (event) => {
     const parsedTasks = Array.isArray(generatedTasks)
       ? generatedTasks
       : Array.isArray(generatedTasks.tasks)
-      ? generatedTasks.tasks
-      : JSON.parse(generatedTasks).tasks;
+        ? generatedTasks.tasks
+        : JSON.parse(generatedTasks).tasks;
 
     // Call the saveTasksToDatabase function to handle database operations
     await saveTasksToDatabase(parsedTasks);

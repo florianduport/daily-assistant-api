@@ -1,0 +1,12 @@
+---
+description: Cron rules
+globs: *.cron.js
+---
+Always use Endurance Cron lib : 
+import { loadCronJob } from 'endurance-core/lib/cron.js';
+
+To define a Cron use it like this : 
+const cronTime = process.env.GENERATE_WEEKLY_TASKS_CRON_TIME ? process.env.GENERATE_WEEKLY_TASKS_CRON_TIME : '0 10 * * 6';
+loadCronJob('generateWeeklyTasks', cronTime, generateWeeklyTasks);
+
+export default {};
