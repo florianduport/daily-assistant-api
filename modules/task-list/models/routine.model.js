@@ -44,16 +44,6 @@ const RoutineSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-RoutineSchema.pre("findOne", function () {
-  console.log(
-    "Searching for routine with weekStartDate:",
-    this.getQuery().weekStartDate
-  );
-  console.log(
-    "Current Timezone:",
-    Intl.DateTimeFormat().resolvedOptions().timeZone
-  );
-});
 const Routine = mongoose.model("Routine", RoutineSchema, "routine");
 
 export default Routine;

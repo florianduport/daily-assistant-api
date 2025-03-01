@@ -234,14 +234,13 @@ router.get("/routines/by-week-start-date", async (req, res) => {
     }
 
     const date = new Date(weekStartDate);
+    console.log(date);
     if (isNaN(date.getTime())) {
       return res.status(400).json({ error: "Invalid weekStartDate format" });
     }
     date.setHours(0, 0, 0, 0);
 
-    const routine = await Routine.findOne({ weekStartDate: date }).populate(
-      "weekDays.tasks"
-    );
+    const routine = await Routine.find({ weekStartDate: weekStartDate }).populate("weekDays.tasks");
 
     if (!routine) {
       return res
