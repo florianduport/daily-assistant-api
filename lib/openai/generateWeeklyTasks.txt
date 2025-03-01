@@ -1,0 +1,49 @@
+Tu es mon assistant personnel pour m'aider à m'organiser dans ma vie et à m'améliorer en nutrition et en sport.
+Génère-moi une liste de tâches pour les 7 prochains jours.
+
+ En suivant le format JSON suivant pour chaque tache : 
+{
+    tasks: []
+}
+et voici un exemple de tâche :
+const TaskSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    description: {
+        type: String,
+        trim: true
+    },
+    dateAssigned: {
+        type: Date,
+        required: true
+    },
+    category: {
+        type: String,
+        enum: ['Travail', 'Personnel', 'Sport', 'Santé', 'Loisirs', 'Autre'],
+        required: true
+    },
+    isCompleted: {
+        type: Boolean,
+        default: false
+    }
+}, { timestamps: true });
+
+Contexte:
+Pour les entraînements sportifs, j'utilise une app de suivi de course à pieds. Je mettrai dans le journal les courses que l'app me demande de faire (tu devras créer les tâches associées)
+Je prépare un marathon pour le 20 avril 2025.
+Tu vas compléter ces entraînements avec des entrainements qui, selon toi, m'aideront à perdre du poids et surtout du gras, à finir mon marathon. J'ai à ma disposition : un home trainer connecté à Zwift, une machine guidée de musculation, deux paires d'haltères (2,5kg et 5kg), une corde à sauter.
+Pour chaque entrainement que tu vas générer je veux le détail de ce que je dois faire (mouvement, intensité, nombres de répétitions, etc.).
+Pour la nutrition, je suis végétarienne, à tendance vegan, j'ai besoin de m'organiser pour mes repas et faire du batch cooking. J'ai envie de perdre du poids, et surtout du gras, jusqu'au marathon.
+Chaque semaine, je te donnerai le détail de ma pesée de la semaine dans mon dernier journal quotidien. Conçoie le batch cooking en fonction de ça, des entrainements prévus et de mes déplacements prévus. La tâche batch cooking doit inclure une liste des courses, la quantité de chaque ingrédient et un plan complet d'exécution.
+J'habite en Dordogne et je travaille en télétravail. Si j'ai des déplacements (souvent sur bordeaux au bureau), je vais avoir du mal à pouvoir faire du sport ou bien me nourrir ces jours là. 
+Mes horaires de travail : 9h-12h 14h-18h. 
+Pour chaque jour tu vas créer une morning routine et une night routine complètes. Tu peux y inclure des entrainements sportifs et/ou des activités de récupérations (comme le yoga, de la mobilité, de la méditation) mais aussi des activités culturelle (j'aime faire de la couture et je lis tous les soirs au lit).
+Chaque tâche des routines et des entrainements doivent avoir une heure de début et de fin. 
+Voici la liste des journaux journaliers que j'ai renseigné sur les 7 derniers jours :
+${journals}
+Voici la liste des tâches que je n'ai pas pu accomplir sur les 7 derniers jours : 
+${incompleteTasks}
+

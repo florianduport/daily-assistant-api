@@ -1,0 +1,38 @@
+{
+  "type": "module",
+  "name": "endurance-template",
+  "version": "0.2.4",
+  "description": "a lightweight express-based api framework with blueprint",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www",
+    "prod": "node ./bin/www",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "debug": "^4.3.7",
+    "endurance-core": "^0.2.14",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "mongoose": "^7.8.2",
+    "openai": "^4.86.1",
+    "path": "^0.12.7",
+    "url": "^0.11.4"
+  },
+  "devDependencies": {
+    "mocha": "^5.1.1",
+    "nodemon": "^3.1.4",
+    "supertest": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/florianduport/endurance-template.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/florianduport/endurance-template/issues"
+  },
+  "homepage": "https://github.com/florianduport/endurance-template#readme"
+}
